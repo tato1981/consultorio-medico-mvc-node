@@ -1,0 +1,20 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Consultorio Medico | #{pagina}
+    link(rel="stylesheet", href=" /css/app.css")
+
+    body.min-h-screen.bg-gray-50(class="bg-[url('https://media.istockphoto.com/id/1001423826/es/foto/realmente-nos-preocupamos.jpg?s=612x612&w=0&k=20&c=BYYK39NzAcVUzpcsOyu0LQX4Ol5KkNEnPPpLU4JenZs=')] bg-no-repeat bg-cover w-full")
+
+        if barra
+            include header-inicio-usuarios
+        
+    
+    
+            
+        main(class="mx-auto container mt-10 px-2")
+        
+            block contenido
+
