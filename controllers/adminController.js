@@ -1,21 +1,21 @@
 import { check, validationResult } from 'express-validator'
 import bcrypt from 'bcrypt'
-import Medico from "../models/Medico.js"
-import {generarJWTMedico, generarIdMedico } from '../helpers/tokens.js'
-import {emailRegistroMedico, olvidePasswordMedico } from '../helpers/emails.js'
+import Admin from "../models/Admin.js"
+import {generarJWTAdmin, generarIdAdmin } from '../helpers/tokens.js'
+import {emailRegistroAdmin, olvidePasswordAdmin } from '../helpers/emails.js'
 
-
-//controlador del aplicativo
-const formularioLoginMedico = (req,res)=> {
-    res.render('auth/login-medico', {
-        pagina: 'Iniciar Sesión Medicos',
+//vista formulario Login
+const formularioLoginAdmin = (req,res)=> {
+    res.render('auth/login-admin', {
+        pagina: 'Iniciar Sesión Administradores',
         csrfToken: req.csrfToken(),
     })
 }
 
-//autenticacion login medicos
 
-const autenticarLoginMedico = async (req, res) =>{
+//autenticación de login 
+const autenticarLoginAdmin = async (req, res) =>{
+
     //validacion formulario login
     await check('email').isEmail().withMessage('El Email es Obligatorio').run(req)
     await check('password').notEmpty().withMessage('El Password es obligatorio').run(req)
@@ -25,8 +25,8 @@ const autenticarLoginMedico = async (req, res) =>{
     //verificar que el resultado de las validacioneseste vacio
     if(!resultado.isEmpty()){
     //errores del formulario
-        return res.render('auth/login-medico', {
-            pagina: 'Iniciar Sesión Medicos',
+        return res.render('auth/login-admin', {
+            pagina: 'Iniciar Sesión',
             csrfToken: req.csrfToken(),
             errores: resultado.array(),
                         
@@ -36,37 +36,37 @@ const autenticarLoginMedico = async (req, res) =>{
     const {email, password} = req.body
 
     //comprobar si el medico existe
-    const medico = await Medico.findOne({where: {email}})
-    if(!medico){
+    const admin = await Admin.findOne({where: {email}})
+    if(!admin){
         //errores del formulario login
-        return res.render('auth/login-medico', {
-            pagina: 'Iniciar Sesión Medicos',
+        return res.render('auth/login-admin', {
+            pagina: 'Iniciar Sesión Administradores',
             csrfToken: req.csrfToken(),
-            errores: [{msg: 'El Medico No Existe'}],                        
+            errores: [{msg: 'El Administrador No Existe'}],                        
         })
     }
 
     //Comprobar si el Medico esta confirmado
-    if(!medico.confirmado){
+    if(!admin.confirmado){
         //errores del formulario login
-        return res.render('auth/login-medico', {
-            pagina: 'Iniciar Sesión Medicos',
+        return res.render('auth/login-admin', {
+            pagina: 'Iniciar Sesión Administradores',
             csrfToken: req.csrfToken(),
             errores: [{msg: 'Tu cuenta no esta Conformada'}],                        
         })
     }
 
     //Revisar el Password
-    if(!medico.verificarPassword(password)){
-        return res.render('auth/login-medico', {
-            pagina: 'Iniciar Sesión Medicos',
+    if(!admin.verificarPassword(password)){
+        return res.render('auth/login-admin', {
+            pagina: 'Iniciar Sesión Administradores',
             csrfToken: req.csrfToken(),
             errores: [{msg: 'El password es Incorrecto'}],                        
         })
     }
 
     //autenticar al usuario
-    const token = generarJWTMedico({id: medico.id, nombre: medico.nombre})
+    const token = generarJWTAdmin({id: admin.id, nombre: admin.nombre})
 
     console.log(token)
 
@@ -75,28 +75,28 @@ const autenticarLoginMedico = async (req, res) =>{
         httpOnly: true,
         //secure: true,
         //sameSite: true
-    }).redirect('/menu-medicos')
+    }).redirect('/menu-admin')   
+
+}
+
+const formularioRegistroAdmin = (req, res) => {    
+
+        res.render('auth/registro-admin', {
+        pagina: 'Crear Cuenta Admin',
+        csrfToken: req.csrfToken(),
+        barra: 'true',
+    })   
     
 }
 
-const formularioRegistroMedico = (req,res)=> {
-
-    res.render('auth/registro-medico', {
-    pagina: 'Crear Cuenta Medico',
-    csrfToken: req.csrfToken(),
-    barra: 'true',
-})
-}
 
 //registrar medico
-const registrarMedico = async(req, res) => {
+const registrarAdmin = async(req, res) => {
     //validaciones
     await check('nombre').notEmpty().withMessage('El nombre es obligatorio').run(req)
     await check('apellidos').notEmpty().withMessage('El apellido es obligatorio').run(req)
     await check('documento').notEmpty().withMessage('El documento es obligatorio').run(req)
-    await check('email').isEmail().withMessage('Eso no parece un email valido').run(req)
-    await check('especialidad').notEmpty().withMessage('La especialidad es obligatoria').run(req) 
-    await check('telefono').notEmpty().withMessage('El teléfono es').run(req)           
+    await check('email').isEmail().withMessage('Eso no parece un email valido').run(req)            
     await check('password').isLength({min: 6}).withMessage('El password debe ser mayor a 6 caracteres').run(req)
     await check('repetir_password').equals(req.body.password).withMessage('Los password no son iguales').run(req)
     
@@ -107,72 +107,63 @@ const registrarMedico = async(req, res) => {
     //verificar que el resultado de las validacioneseste vacio
     if(!resultado.isEmpty()){
     //errores del formulario
-        return res.render('auth/registro-medico', {
-            pagina: 'Crear Cuenta Medico',
+        return res.render('auth/registro-admin', {
+            pagina: 'Crear Cuenta Admin',
             csrfToken: req.csrfToken(),
             errores: resultado.array(),
             barra:true,            
             //autollenado del formurio
-            medico:{
+            admin:{
                 nombre: req.body.nombre,
                 apellidos: req.body.apellidos,
                 documento: req.body.documento,
-                email: req.body.email,
-                especialidad: req.body.especialidad,
-                telefono: req.body.telefono,
+                email: req.body.email,               
                 
             }
         })
     }
 
-    
 
-    //verificar si el medico ya esta registrado existe
+    //verificar si el admin ya esta registrado existe
     //extraer los datos
-    const {nombre, apellidos, documento, email, especialidad, telefono, password} = req.body;
+    const {nombre, apellidos, documento, email, password} = req.body;
 
-    //verificar que el usuario ya existe
-    const existeMedico = await Medico.findOne({ where: { documento } })    
-    if(existeMedico){
-        return res.render('auth/registro-medico', {
-            pagina: 'Crear Cuenta Medico',
+    //verificar que el admin ya existe
+    const existeAdmin = await Admin.findOne({ where: { documento } })    
+    if(existeAdmin){
+        return res.render('auth/registro-admin', {
+            pagina: 'Crear Cuenta Admin',
             csrfToken: req.csrfToken(),
-            errores: [{msg: 'El medico ya esta registrado'}],
+            errores: [{msg: 'El admin ya esta registrado'}],
             //autollenado del formurio medico
-            medico:{
+            admin:{
                 nombre: req.body.nombre,
                 apellidos: req.body.apellidos,
                 documento: req.body.documento,
-                email: req.body.email,
-                especialidad: req.body.especialidad,
-                telefono: req.body.telefono,
-                
-
+                email: req.body.email,               
             }
         })
-    }   
+    } 
+    
     
     //almacenar un usuario
-    const medico = await Medico.create({
+    const admin = await Admin.create({
         nombre,
         apellidos,
         documento,
-        email,
-        especialidad,
-        telefono,       
+        email,            
         password,
-        token: generarIdMedico()
+        token: generarIdAdmin()
     })
 
+    
     //envia email de confirmacion
-    emailRegistroMedico({
+    emailRegistroAdmin({
         nombre: req.body.nombre,
         apellidos: req.body.apellidos,
         documento: req.body.documento,
-        email: req.body.email,
-        especialidad: req.body.especialidad,
-        telefono: req.body.telefono,       
-        token: medico.token
+        email: req.body.email,            
+        token: admin.token
     })
     //mostrar mensaje de confirmacion
 
@@ -180,42 +171,44 @@ const registrarMedico = async(req, res) => {
         pagina: 'Cuenta Creada Correctamente',
         mensaje: 'Hemos Enviado un Email de Confirmación, presiona en el enlace'
     })
+
 }
 
+
 //funcion que comprueba una cuenta
-const confirmar = async (req, res) => {
+const confirmarAdmin = async (req, res) => {
     const{token} = req.params;
     
 
     //verificar si el token es valido
-    const medico = await Medico.findOne({where: {token}})
+    const admin = await Admin.findOne({where: {token}})
 
-    if(!medico){
-        return res.render('auth/confirmar-cuenta-medico', {
+    if(!admin){
+        return res.render('auth/confirmar-cuenta-admin', {
             pagina: 'Error al Confirmar la Cuenta',
             mensaje: 'Hubo un error al confirmar la cuenta, intenta de nuevo',
             error: true
         })  
     }
     //confirmar la cuenta
-    medico.token = null;
-    medico.confirmado = true;
-    await medico.save();
+    admin.token = null;
+    admin.confirmado = true;
+    await admin.save();
 
-    res.render('auth/confirmar-cuenta-medico', {
+    res.render('auth/confirmar-cuenta-admin', {
         pagina: 'Cuenta Confirmada',
         mensaje: 'La cuenta se confirmó correctamente'        
     })  
 }
 
-const formularioOlvidePasswordMedico = (req,res)=> {
-    res.render('auth/olvide-password-medico', {
+const formularioOlvidePasswordAdmin = (req, res) =>{
+    res.render('auth/olvide-password-admin', {
         pagina: 'Recupera acceso al Consultorio Medico',
         csrfToken: req.csrfToken(),
     })
 }
 
-const resetPasswordMedico = async (req,res) =>{
+const resetPasswordAdmin = async (req,res) =>{
 
     //validaciones reset password    
     await check('email').isEmail().withMessage('Eso no parece un email valido').run(req)
@@ -225,7 +218,7 @@ const resetPasswordMedico = async (req,res) =>{
     //verificar que el resultado de las validaciones este vacio
     if(!resultado.isEmpty()){
     //errores del formulario
-        return res.render('auth/olvide-password-medico', {
+        return res.render('auth/olvide-password-admin', {
             pagina: 'Recupera acceso al Consultorio Medico',
             csrfToken: req.csrfToken(),
             errores: resultado.array(),
@@ -234,28 +227,26 @@ const resetPasswordMedico = async (req,res) =>{
 
     //buscar al usuario
     const {email} = req.body;
-    const medico = await Medico.findOne({where: {email}})
-    if(!medico){
-        return res.render('auth/olvide-password-medico', {
+    const admin = await Admin.findOne({where: {email}})
+    if(!admin){
+        return res.render('auth/olvide-password-admin', {
             pagina: 'Recupera acceso al Consultorio Medico',
             csrfToken: req.csrfToken(),
-            errores: [{msg: 'El Email no Pertenece a Ningún Medico'}]
+            errores: [{msg: 'El Email no Pertenece a Ningún Administrador'}]
         })
     }
 
     //generar token y enviar el email.
-    medico.token = generarIdMedico();
-    await medico.save();
+    admin.token = generarIdAdmin();
+    await admin.save();
 
     //enviar un email
-    olvidePasswordMedico({
+    olvidePasswordAdmin({
         nombre: req.body.nombre,
         apellidos: req.body.apellidos,
         documento: req.body.documento,
-        email: req.body.email,
-        especialidad: req.body.especialidad,
-        telefono: req.body.telefono,
-        token:  medico.token
+        email: req.body.email,        
+        token:  admin.token
     })
 
     //rendirizar un mensaje
@@ -266,13 +257,13 @@ const resetPasswordMedico = async (req,res) =>{
 
 }
 
-const comprobarTokenMedico = async (req, res) => {
+const comprobarTokenAdmin = async (req, res) => {
     const {token} = req.params
 
-    const medico = await Medico.findOne({where: {token}})
+    const admin = await Admin.findOne({where: {token}})
 
-    if(!medico){
-        return res.render('auth/confirmar-cuenta-medico', {
+    if(!admin){
+        return res.render('auth/confirmar-cuenta-admin', {
             pagina: 'Restablece Tu Password',
             mensaje: 'Hubo un error al validar tu información, intenta de nuevo',
             error: true
@@ -280,15 +271,14 @@ const comprobarTokenMedico = async (req, res) => {
     }
 
     //mostrar formulario para modificar el password
-    res.render('auth/reset-password-medico', {
+    res.render('auth/reset-password-admin', {
         pagina: 'Restablece tu Password',
         csrfToken: req.csrfToken()
 
     })
-
 }
 
-const nuevoPasswordMedico = async(req, res) =>{
+const nuevoPasswordAdmin = async(req, res) =>{
     //validar el password
     await check('password').isLength({min: 6}).withMessage('El password debe ser mayor a 6 caracteres').run(req)
 
@@ -297,7 +287,7 @@ const nuevoPasswordMedico = async(req, res) =>{
     //verificar que el resultado de las validacioneseste vacio
     if(!resultado.isEmpty()){
     //errores del formulario
-        return res.render('auth/reset-password-medico', {
+        return res.render('auth/reset-password-admin', {
             pagina: 'Restablece Tu Password',
             csrfToken: req.csrfToken(),
             errores: resultado.array(),
@@ -309,31 +299,39 @@ const nuevoPasswordMedico = async(req, res) =>{
     const {password} = req.body
 
     //Identificar quien hace el cambio
-    const medico = await Medico.findOne({where: {token}})
+    const admin = await Admin.findOne({where: {token}})
     
     //hashear el nuevo password
     const salt = await bcrypt.genSalt(10)
-    medico.password = await bcrypt.hash(password, salt);
-    medico.token = null
+    admin.password = await bcrypt.hash(password, salt);
+    admin.token = null
 
-    await medico.save()
+    await admin.save()
     
-    res.render('auth/confirmar-cuenta-medico', {
+    res.render('auth/confirmar-cuenta-admin', {
         pagina: 'Password Restablecido',
         mensaje: 'El password se Guardó correctamente'        
     })  
 }
 
 
-export  {
-        formularioLoginMedico,
-        autenticarLoginMedico,
-        formularioRegistroMedico,
-        registrarMedico,
-        confirmar,
-        formularioOlvidePasswordMedico,
-        resetPasswordMedico,
-        comprobarTokenMedico,
-        nuevoPasswordMedico,
+
+
+
+
+
+
+
+
+export {
+    formularioLoginAdmin,
+    autenticarLoginAdmin,
+    formularioRegistroAdmin,
+    registrarAdmin,
+    confirmarAdmin,
+    formularioOlvidePasswordAdmin,
+    resetPasswordAdmin,
+    comprobarTokenAdmin,
+    nuevoPasswordAdmin
 
 }

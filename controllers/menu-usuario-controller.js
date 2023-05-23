@@ -1,9 +1,10 @@
 import { check, validationResult } from 'express-validator'
 import Paciente from "../models/Paciente.js"
-import Cita from '../models/Citas.js'
+import Cita from '../models/Cita.js'
+import Usuario from '../models/Usuario.js'
+//import {Usuario, Paciente, Medico, Cita} from '../models/index.js'
 
 const inicioUsuarios =  (req,res) => {
-
     res.render('menu-usuarios/inicio-usuarios', {
         pagina: 'Inicio Usuarios',
         barra: 'true',       
@@ -11,11 +12,25 @@ const inicioUsuarios =  (req,res) => {
     })
 }
 
-const admin =  (req,res) => {
+const admin = async (req,res) => {
 
+   //const {usuario}  = req.usuario
+   //const usuarios =await Usuario.findAll({ })
+
+
+    
+    //const usuarios =await Usuario.findAll({ })
+    //.then(Usuario => res.status(200).send(Usuario))
+    //.catch(error => res.status(400).send(error))
+
+    //console.log(usuario)
+
+    
     res.render('menu-usuarios/admin', {
         pagina: 'Menu Principal Usuarios',
-        barra: 'true',       
+        barra: 'true', 
+        
+       
         
     })
 }
@@ -26,7 +41,7 @@ const formularioRegistroPacientes = (req,res) =>{
         pagina: 'Registro Pacientes',
         csrfToken: req.csrfToken(),
         barra: 'true',
-        barraUsuario: 'true'
+       
       
     })
 }
@@ -159,15 +174,17 @@ const registrarCita = async (req, res) => {
         })
     }
 
-    const {documento} = req.body
+ const {hora_cita} = req.body
 
-     //verificar que el paciente no este duplicado
- const existeCita = await Cita.findOne({where: {documento}}) //findOne() busca un usuario en la base de datos
-if(existeCita){
+     //verificar que la cita no este duplicado
+ const existeCita = await Cita.findOne({where: {hora_cita}}) //findOne() busca un usuario en la base de datos
+ 
+
+ if(existeCita){
     return res.render('menu-usuarios/registroCitas', {
         pagina : 'Registrar Cita',//objeto que se quiere pasar a esa vista  
         csrfToken: req.csrfToken(),    
-         errores: [{msg: 'La Cita ya esta Asignada'}],  //array al vuelo
+         errores: [{msg: 'La Cita ya esta Asignada para ese dia y hora'}],  //array al vuelo
         barra:true,
         cita:{            
             nombre: req.body.nombre,

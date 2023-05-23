@@ -1,4 +1,4 @@
-extends ../layout/index-menu-admin
+extends ../layout/index
 
 block contenido
   div.py-10          
@@ -11,35 +11,27 @@ block contenido
 
     div.mt-5.mx-auto.max-w-screen-lg
       .bg-white.opacity-90.py-8.px-4.rounded-lg(class=" shadow-lg shadow-pink-400/50")
-         form.space-y-4(class="grid grid-cols-2 gap-2" method="POST" action="/auth/registro-medico" noValidate)
+         form.space-y-4(class="grid grid-cols-2 gap-2" method="POST" action="/auth/registro-admin" noValidate)
             input(type="hidden" name="_csrf" value= csrfToken)
 
             div
                label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="nombre") Nombre
-               input#nombre.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Nombre" type="text" name="nombre" value= medico ? medico.nombre: '')         
+               input#nombre.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Nombre" type="text" name="nombre" value= admin ? admin.nombre: '')         
                         
             div
                label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="apellidos") Apellidos
-               input#apellidos.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Apellidos" type="text" name="apellidos" value= medico ? medico.apellidos: '')
+               input#apellidos.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Apellidos" type="text" name="apellidos" value= admin ? admin.apellidos: '')
 
             div
                label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="documento") Documento
-               input#documento.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Documento" type="text" name="documento" value= medico ? medico.documento: '')         
+               input#documento.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Documento" type="text" name="documento" value= admin ? admin.documento: '')         
                         
             div
                label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="email") Email de Registro
-               input#email.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Email" type="email" name="email" value= medico ? medico.email: '')
-            
+               input#email.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Email" type="email" name="email" value= admin ? admin.email: '')
+                        
             div
-               label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="especialidad") Especialidad 
-               input#especialidad.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Especialidad" type="text" name="especialidad" value= medico ? medico.especialidad: '')           
-            
-            div
-               label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="telefono") Teléfono
-               input#telefono.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Teléfono" type="number" name="telefono" value= medico ? medico.telefono: '')          
-
-            div
-               label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="password") Password del Usuario
+               label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="password") Password del Admin
                input#password.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Password" type="password" name="password" )
 
             div
@@ -48,6 +40,6 @@ block contenido
             
             div.flex.items-center.justify-between
               <!-- a.text-gray-500.text-xs(href="/auth/login-usuario") Ya tienes cuenta? Inicia Sesión -->
-               a.text-gray-500.text-xs(href="/auth/olvide-password-usuario") Olvide mis Password
+               a.text-gray-500.text-xs(href="/auth/olvide-password-admin") Olvide mis Password
 
             input(class="w-full bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-black font-bold py-3 cursor-pointer" type="submit" value="Crear Cuenta")

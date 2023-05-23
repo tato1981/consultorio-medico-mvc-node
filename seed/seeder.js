@@ -1,8 +1,9 @@
 import {exit} from "node:process"
 import usuarios from "./usuarios.js";
 import medicos from "./medicos.js";
+import admins from "./admins.js";
 import db from "../config/db.js";
-import {Usuario, Medico} from "../models/index.js"
+import {Usuario, Medico, Admin} from "../models/index.js"
 
 const importarDatos = async () =>{
     try {
@@ -13,6 +14,7 @@ const importarDatos = async () =>{
         //insertar los datos
         await Usuario.bulkCreate(usuarios)
         await Medico.bulkCreate(medicos)
+        await Admin.bulkCreate(admins)
         console.log('Datos Importados correctamente')
         exit()
 

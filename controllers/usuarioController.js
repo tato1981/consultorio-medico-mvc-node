@@ -85,7 +85,8 @@ const formularioRegistroUsuario = (req,res)=> {
 
         res.render('auth/registro-usuario', {
         pagina: 'Crear Cuenta Usuario',
-        csrfToken: req.csrfToken()
+        csrfToken: req.csrfToken(),
+        barra: true,
     })
 }
 
@@ -101,7 +102,7 @@ const registrar = async(req, res) => {
     await check('repetir_password').equals(req.body.password).withMessage('Los password no son iguales').run(req)
     
 
-
+    //validacion registros ussuarios
     let resultado = validationResult(req)
 
     //verificar que el resultado de las validacioneseste vacio
@@ -119,14 +120,18 @@ const registrar = async(req, res) => {
                 email: req.body.email,
                 telefono: req.body.telefono,
             }
+            
+            
         })
-    }
 
-    
+        
+    }    
 
     //verificar si el usuario existe
     //extraer los datos
     const {nombre, apellidos, documento, email, telefono, password} = req.body;
+
+    
 
     //verificar que el usuario ya existe
     const existeUsuario = await Usuario.findOne({ where: { email } })    
@@ -153,7 +158,7 @@ const registrar = async(req, res) => {
         documento,
         email,
         telefono,
-        password,
+        password,        
         token: generarId()
     })
 
@@ -172,6 +177,8 @@ const registrar = async(req, res) => {
         pagina: 'Cuenta Creada Correctamente',
         mensaje: 'Hemos Enviado un Email de Confirmación, presiona en el enlace'
     })
+
+    
 }
 
 //funcion que comprueba una cuenta
@@ -181,13 +188,14 @@ const confirmar = async (req, res) => {
 
     //verificar si el token es valido
     const usuario = await Usuario.findOne({where: {token}})
-
+        console.log(token)
     if(!usuario){
         return res.render('auth/confirmar-cuenta', {
             pagina: 'Error al Confirmar la Cuenta',
             mensaje: 'Hubo un error al confirmar la cuenta, intenta de nuevo',
             error: true
-        })  
+        })
+        
     }
     //confirmar la cuenta
     usuario.token = null;
@@ -314,6 +322,7 @@ const nuevoPasswordUsuario = async(req, res) =>{
         pagina: 'Password Restablecido',
         mensaje: 'El password se Guardó correctamente'        
     })  
+
 }
 
 

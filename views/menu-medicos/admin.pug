@@ -1,24 +1,31 @@
 extends ../layout/index
 
 block contenido 
-  
-  div(class="")          
-    h2(class="text-center text-2xl font-extrabold")= pagina 
+
+
+  div(class="flex flex-grow px-3 pt-5")
+      aside(class="flex-initial w-30 bg-cyan-50 opacity-70 p-4 max-w-full rounded-lg") 
+          h2(class="text-center font-bold text-2xl") MENU
+           
+          a(href="#" class="rounder py-2 px-10 bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-sm font-bold text-center text-black uppercase my-5 block w-full sm:w-auto") Agenda
 
   
-  div(class="absolute  bg-cyan-50 opacity-70 p-4 max-w-full  h-screen mt-0 left-0")
-    h2(class="text-black text-center font-bold uppercase") Menu
-    nav(class="translate-y-1/4")       
-      a(href="/auth/registro-usuario" class="rounder py-2 px-10 bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-sm font-bold text-center text-black uppercase my-5 block w-full sm:w-auto") Agenda
+          a(href="#" class="rounder py-2 px-10 bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-sm font-bold text-center text-black uppercase my-5 block w-full sm:w-auto") Historia Clínica
+
+
+          a(href="#" class="rounder py-2 px-10 bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-sm font-bold text-center text-black uppercase my-5 block w-full sm:w-auto") Formulas Medicas
 
   
-      a(href="#" class="rounder py-2 px-10 bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-sm font-bold text-center text-black uppercase my-5 block w-full sm:w-auto") Historia Clínica
+          a(href="#" class="rounder py-2 px-10 bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-sm font-bold text-center text-black uppercase my-5 block w-full sm:w-auto") Incapacidades
 
 
-      a(href="/auth/registro-medico" class="rounder py-2 px-10 bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-sm font-bold text-center text-black uppercase my-5 block w-full sm:w-auto") Formulas Medicas
+         
+
+      section(class=" flex-1 w-70  text-center font-bold")
+          h2(class="text-center font-bold text-2xl")= pagina 
+
 
   
-      a(href="#" class="rounder py-2 px-10 bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-sm font-bold text-center text-black uppercase my-5 block w-full sm:w-auto") Incapacidades
-
+  
 
       

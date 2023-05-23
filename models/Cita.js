@@ -2,7 +2,7 @@ import {DataTypes} from 'sequelize'
 import db from '../config/db.js'
 
 //tabla usuarios
-const Cita = db.define('cita', {
+const Cita = db.define('citas', {
         nombre: {
             type: DataTypes.STRING,
             allowNull: false

@@ -11,16 +11,18 @@ const router = express.Router();
 router.get('/login-usuario', formularioLoginUsuario)
 router.post('/login-usuario', autenticarLoginUsuario);
 
+//registro usuarios
 router.get('/registro-usuario', formularioRegistroUsuario );
 router.post('/registro-usuario', registrar );
 
+//confirmar token
 router.get('/confirmar/:token', confirmar)
 
+//olvide password
 router.get('/olvide-password-usuario', formularioOlvidePasswordUsuario );
 router.post('/olvide-password-usuario', resetPassword );
 
 //almacena el nuevo password
-
 router.get('/olvide-password-usuario/:token', comprobarTokenUsuario );
 router.post('/olvide-password-usuario/:token', nuevoPasswordUsuario );
 
