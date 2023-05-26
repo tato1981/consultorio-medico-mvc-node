@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
-import {Usuario} from "../models/index.js"
+import {Admin} from "../models/index.js"
 
-const protegerRuta = async (req, res, next) =>{
+const protegerRutaAdmin = async (req, res, next) =>{
 
     
     //verificar si hay un token
@@ -13,26 +13,26 @@ const protegerRuta = async (req, res, next) =>{
     //comprobar el token
     
     try {
-/*
-       //const  decoded = jwt.verify(_token, process.env.JWT_SECRET) 
-        const usuario = await Usuario.scope('eliminarPassword').finByPk(decoded.id)
+
+    const  decoded = jwt.verify(_token, process.env.JWT_SECRET) 
+        const admin= await Admin.scope('eliminarPassword').finByPk(decoded.id)
 
         //almacenar al usuario al req
-        if(usuario){
-            req.usuario = usuario
+        if(admin){
+            req.admin = admin
             
         }else{
-            return res.redirect('auth/login-usuario')
+            return res.redirect('auth/login-admin')
         } 
         
-        */
+        
       
         return  next()
 
         
         
     } catch (error) {
-        return res.clearCookie('_token').redirect('auth/login-usuario')
+        return res.clearCookie('_token').redirect('auth/login-admin')
     }   
     
 
@@ -41,4 +41,4 @@ const protegerRuta = async (req, res, next) =>{
 
 }
 
-export default protegerRuta  
+export default protegerRutaAdmin  

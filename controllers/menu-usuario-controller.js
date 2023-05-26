@@ -2,6 +2,7 @@ import { check, validationResult } from 'express-validator'
 import Paciente from "../models/Paciente.js"
 import Cita from '../models/Cita.js'
 import Usuario from '../models/Usuario.js'
+
 //import {Usuario, Paciente, Medico, Cita} from '../models/index.js'
 
 const inicioUsuarios =  (req,res) => {
@@ -14,23 +15,10 @@ const inicioUsuarios =  (req,res) => {
 
 const admin = async (req,res) => {
 
-   //const {usuario}  = req.usuario
-   //const usuarios =await Usuario.findAll({ })
-
-
-    
-    //const usuarios =await Usuario.findAll({ })
-    //.then(Usuario => res.status(200).send(Usuario))
-    //.catch(error => res.status(400).send(error))
-
-    //console.log(usuario)
-
-    
-    res.render('menu-usuarios/admin', {
+        res.render('menu-usuarios/admin', {
         pagina: 'Menu Principal Usuarios',
         barra: 'true', 
         
-       
         
     })
 }
@@ -449,6 +437,48 @@ const eliminarPacientes = async (req, res) => {
 
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const inicioPagos = (req,res) =>{
+
+    res.render('menu-usuarios/pagos', {
+        pagina: 'Medios de Pagos',
+        barra: 'true',       
+            
+        })
+    }
+
+const pagoEfectivo = (req,res) =>{
+
+        res.render('menu-usuarios/pago-efectivo', {
+            pagina: 'Pago en Efectivo',
+            barra: 'true',       
+                
+            })
+        }
+    
+const pagoTarjeta = (req,res) =>{
+
+        res.render('menu-usuarios/pago-tarjeta', {
+            pagina: 'Pago Tarjeta de Crédito',
+            barra: 'true',       
+                    
+        })
+}
+
+const transferencia = (req,res) =>{
+
+    res.render('menu-usuarios/transferencia', {
+        pagina: 'Transferencia Bancaria',
+        barra: 'true',       
+            
+        })
+    }
+
+        
+
+
+
 export {
     inicioUsuarios,
     admin,
@@ -466,6 +496,11 @@ export {
     editarPacientes,
     guardarCambiosPacientes,
     eliminarPacientes,
+    //pagos
+    inicioPagos,
+    pagoEfectivo,
+    pagoTarjeta,
+    transferencia,
 }
 
 

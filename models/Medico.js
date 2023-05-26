@@ -43,6 +43,13 @@ const Medico = db.define('medicos', {
             const salt = await bcrypt.genSalt(10)
             medico.password = await bcrypt.hash(medico.password, salt)
         }
+    },
+    scopes: {
+        eliminarPassword: {
+            attributes: {
+                exclude: ['password', 'token', 'confirmado', 'createdAt', 'updatedAt']
+            }
+        }
     }
 });
 
