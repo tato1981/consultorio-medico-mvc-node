@@ -1,7 +1,7 @@
-extends ../layout/index-menu-usuarios
+extends ../layout/index-menu-medicos
 
 block contenido 
-   div.py-3
+   div.py-1
      h2.text-center.text-2xl.font-extrabold= pagina
 
      if errores 
@@ -12,8 +12,8 @@ block contenido
                
     
    div.mt-5.mx-auto.max-w-screen-lg
-      .bg-white.opacity-90.py-4.px-4.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")
-         form.space-y-4(class="grid grid-cols-2 gap-3" method="POST" action="/menu-usuarios/registroCitas" noValidate)
+      .bg-white.opacity-90.py-8.px-4.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")
+         form.space-y-4(class="grid grid-cols-2 gap-3" method="POST"  noValidate)
             input(type="hidden" name="_csrf" value= csrfToken)
 
             div
@@ -62,8 +62,6 @@ block contenido
             div
                label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="hora_cita") Hora de la Cita
                input#hora_cita.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Hora de la Cita" type="time" name="hora_cita" value= cita ? cita.hora_cita : '' )
-
-
 
 
             input(class="w-full bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-black font-bold py-3 cursor-pointer " type="submit" value="Registrar")

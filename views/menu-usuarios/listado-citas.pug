@@ -1,0 +1,53 @@
+extends ../layout/index-menu-usuarios
+
+block contenido 
+
+
+    div(class="flex flex-grow px-3 p-0")
+     section(class=" flex-1 w-10  text-center font-bold")
+        h2(class="text-center font-bold text-2xl mt-5 ")= pagina
+
+          //- pre= JSON.stringify(citas, undefined, 2)
+
+        
+        if citas.length
+         div.mt-5.mx-auto.max-w-screen-2xl.pt-5(class="")
+          .bg-white.opacity-90.py-8.px-5.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")               
+            table(class=" p-2 border-separate border-spacing-2 border border-slate-500 ")                    
+                thead
+                    tr(class="text-xs") 
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") NOMBRE
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") APELLIDOS
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") DOCUMENTO
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") FECHA/NACIMIENTO
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") EDAD
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") EMAIL
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") TELÉFONO
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") SERVICIO MEDICO
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") ESPECIALIDAD
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") FECHA/CITA
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") HORA/CITA
+                        th(class="bg-slate-200  border border-slate-100 px-4 py-2") ACCIONES
+                tbody            
+                each cita in citas
+                    tr 
+                        td(class="border border-slate-200 px4 py-2")= cita.nombre
+                        td(class="border border-slate-200  px4 py-2")= cita.apellidos
+                        td(class="border border-slate-200 px4 py-2")= cita.documento
+                        td(class="border border-slate-200 px4 py-2")= cita.fecha_nacimiento                        
+                        td(class="border border-slate-200 px4 py-2")= cita.edad  
+                        td(class="border border-slate-200 px4 py-2")= cita.email
+                        td(class="border border-slate-200 px4 py-2")= cita.telefono
+                        td(class="border border-slate-200 px4 py-2")= cita.servicio_medico
+                        td(class="border border-slate-200 px4 py-2")= cita.especialidad 
+                        td(class="border border-slate-200 px4 py-2")= cita.fecha_cita
+                        td(class="border border-slate-200 px4 py-2")= cita.hora_cita                    
+                        td(class="text-center flex flex-grow mx-2")
+                        
+                            a( href=`/menu-usuarios/editarCitas/${cita.id}`  class=" border border-slate-200 px4 py-2 text-white  font-bold bg-blue-600 hover:bg-blue-900 rounded-lg" ) Editar 
+                                                                
+                            form(method="POST" action=`/menu-usuarios/listado-eliminar-citas/${cita.id}`)
+                                input(type="hidden" name="_csrf" value= csrfToken)
+                                input(type="submit" class=' border border-slate-200 px4 py-2 text-white  font-bold bg-red-600 hover:bg-red-900 rounded-lg' value="Eliminar") 
+        else 
+         p(class="text-center font-bold") No Hay Pacientes Registrados

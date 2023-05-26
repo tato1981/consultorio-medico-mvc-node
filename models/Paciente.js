@@ -16,7 +16,7 @@ const Paciente = db.define('paciente', {
             allowNull: false
         },
         fecha_nacimiento: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
         },
         edad: {

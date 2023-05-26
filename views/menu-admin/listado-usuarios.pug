@@ -11,8 +11,8 @@ block contenido
 
         
         if usuarios.length
-        div.mt-5.mx-auto.max-w-screen-lg.pt-5
-         .bg-white.opacity-90.py-8.px-6.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")               
+         div.mt-5.mx-auto.max-w-screen-lg.pt-5
+          .bg-white.opacity-90.py-8.px-6.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")               
             table(class=" border-separate border-spacing-2 border border-slate-500")                    
                 thead
                     tr 
@@ -36,5 +36,7 @@ block contenido
                             form(method="POST" action=`/menu-admin/listado-eliminar/${usuario.id}`)
                                 input(type="hidden" name="_csrf" value= csrfToken)
                                 input(type="submit" class=' border border-slate-200 px4 py-2 text-white  font-bold bg-red-600 hover:bg-red-900 rounded-lg' value="Eliminar") 
-
+        
+        else 
+         p(class="text-center font-bold") No Hay Usuarios Registrados
     

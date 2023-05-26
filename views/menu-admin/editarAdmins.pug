@@ -1,7 +1,8 @@
 extends ../layout/index-menu-admin
 
 block contenido
-  div.py-10          
+
+  div.py-2           
     h2.text-center.text-2xl.font-extrabold= pagina
 
     if errores
@@ -10,8 +11,8 @@ block contenido
          p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold= error.msg 
 
     div.mt-5.mx-auto.max-w-screen-lg
-      .bg-white.opacity-90.py-8.px-4.rounded-lg(class=" shadow-lg shadow-pink-400/50")
-         form.space-y-4(class="grid grid-cols-2 gap-2" method="POST" action="/auth/registro-admin" noValidate)
+      .bg-white.opacity-90.py-8.px-4.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")
+         form.space-y-4(class="grid grid-cols-2 gap-2 " method="POST"  noValidate)
             input(type="hidden" name="_csrf" value= csrfToken)
 
             div
@@ -29,17 +30,10 @@ block contenido
             div
                label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="email") Email de Registro
                input#email.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Email" type="email" name="email" value= admin ? admin.email: '')
-                        
-            div
-               label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="password") Password del Admin
-               input#password.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Password" type="password" name="password" )
-
-            div
-               label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="repetir_password") Repetir Password 
-               input#repetir_password.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Repetir Password" type="password" name="repetir_password")
             
+                                    
             div.flex.items-center.justify-between
-              <!-- a.text-gray-500.text-xs(href="/auth/login-usuario") Ya tienes cuenta? Inicia Sesión -->
+               a.text-gray-500.text-xs(href="/auth/loginadmin") Ya tienes cuenta? Inicia Sesión
                a.text-gray-500.text-xs(href="/auth/olvide-password-admin") Olvide mis Password
 
-            input(class="w-full bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-black font-bold py-3 cursor-pointer" type="submit" value="Crear Cuenta")
+            input(class="w-full bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-black font-bold py-3 cursor-pointer" type="submit" value="actualizar")

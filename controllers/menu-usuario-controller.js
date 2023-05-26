@@ -209,11 +209,245 @@ const cita = await Cita.create( req.body )
             mensaje: 'La Cita se Asignó Correctamente'        
         })  
     }
-
 }
 
 
+//crud citas
+//listar citas
+const listarCitas = async (req,res) =>{
 
+    const citas = await Cita.findAll({ })
+
+      res.render('menu-usuarios/listado-citas', {
+        pagina: 'Citas Registradas',
+        csrfToken: req.csrfToken(),      
+        barra: 'true',
+        citas,
+
+    })  
+}
+
+//editar cita
+
+const  editarCitas = async (req, res) =>{
+
+    const {id} = req.params
+
+    //validar se el paciente existe
+    const cita = await Cita.findByPk(id)
+
+    if(!cita){
+        return res.redirect('/menu-usuarios/admin')
+    }
+
+
+    const [citas] = await Promise.all([  
+        Cita.findAll()
+    ])
+
+    res.render('menu-usuarios/editarCitas', {
+        pagina: `Editar Citas: ${cita.nombre}`,
+        csrfToken: req.csrfToken(),
+        barra: true,
+        citas,
+        cita
+    })   
+
+}
+
+const guardarCambiosCitas = async (req,res) =>{
+
+    let resultado = validationResult(req)
+
+    if(!resultado.isEmpty()){
+
+        const [cita] = await Promise.all([  
+            Cita.findAll()
+        ])
+    
+        return res.render('menu-usuarios/editarCitas', {
+                pagina: 'Editar Citas',
+                csrfToken: req.csrfToken(),
+                barra: true,
+                cita,
+                errores: resultado.array(),
+                cita: req.body
+        })
+
+    }
+
+    const {id} = req.params
+
+    //validar si la cita existe
+    const cita = await Cita.findByPk(id)
+
+    if(!cita){
+        return res.redirect('/menu-usuarios/admin')
+    }
+
+    //reescribir la cita y guardarla
+
+    try {
+        const {nombre, apellidos, documento, fecha_nacimiento, edad, email, telefono, servicio_medico} = req.body;
+
+        cita.set({
+            nombre,
+            apellidos,
+            documento,
+            fecha_nacimiento,
+            edad,
+            email,
+            telefono,
+            servicio_medico
+        })
+
+        await cita.save();
+
+        res.redirect('/menu-usuarios/listado-citas')
+
+
+    } catch (error) {
+        console.log(error)
+        
+    }
+
+}
+
+//eliminar cita
+const eliminarCitas = async (req, res) => {
+    const {id} = req.params
+
+    const citas = await Cita.findByPk(id)
+
+    if(!citas) {
+        return res.redirect('/menu-usuarios/listado-citas')
+    }
+
+        // Eliminar la propiedad
+    await citas.destroy()
+    res.redirect('/menu-usuarios/listado-citas')
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//crud pacientes
+
+//listar pacientes
+const listarPacientes = async (req,res) =>{
+
+    const pacientes = await Paciente.findAll({ })
+
+      res.render('menu-usuarios/listado-pacientes', {
+        pagina: 'Pacientes Registrados',
+        csrfToken: req.csrfToken(),      
+        barra: 'true',
+        pacientes,
+
+    })  
+}
+
+//editar pacientes
+
+const  editarPacientes = async (req, res) =>{
+
+    const {id} = req.params
+
+    //validar se el paciente existe
+    const paciente = await Paciente.findByPk(id)
+
+    if(!paciente){
+        return res.redirect('/menu-usuarios/admin')
+    }
+
+
+    const [pacientes] = await Promise.all([  
+        Paciente.findAll()
+    ])
+
+    res.render('menu-usuarios/editarPacientes', {
+        pagina: `Editar Pacientes: ${paciente.nombre}`,
+        csrfToken: req.csrfToken(),
+        barra: true,
+        pacientes,
+        paciente
+    })   
+
+}
+
+const guardarCambiosPacientes = async (req,res) =>{
+
+    let resultado = validationResult(req)
+
+    if(!resultado.isEmpty()){
+
+        const [paciente] = await Promise.all([  
+            Paciente.findAll()
+        ])
+    
+        return res.render('menu-usuarios/editarPacientes', {
+                pagina: 'Editar Pacientes',
+                csrfToken: req.csrfToken(),
+                barra: true,
+                paciente,
+                errores: resultado.array(),
+                paciente: req.body
+        })
+
+    }
+
+    const {id} = req.params
+
+    //validar se el paciente existe
+    const paciente = await Paciente.findByPk(id)
+
+    if(!paciente){
+        return res.redirect('/menu-usuarios/admin')
+    }
+
+    //reescribir al paciente y guardarlo
+
+    try {
+        const {nombre, apellidos, documento, fecha_nacimiento, edad, email, telefono, servicio_medico} = req.body;
+
+        paciente.set({
+            nombre,
+            apellidos,
+            documento,
+            fecha_nacimiento,
+            edad,
+            email,
+            telefono,
+            servicio_medico
+        })
+
+        await paciente.save();
+
+        res.redirect('/menu-usuarios/listado-pacientes')
+
+
+    } catch (error) {
+        console.log(error)
+        
+    }
+
+}
+
+//eliminar pacientes
+const eliminarPacientes = async (req, res) => {
+    const {id} = req.params
+
+    const pacientes = await Paciente.findByPk(id)
+
+    if(!pacientes) {
+        return res.redirect('/menu-usuarios/listado-pacientes')
+    }
+
+        // Eliminar la propiedad
+    await pacientes.destroy()
+    res.redirect('/menu-usuarios/listado-pacientes')
+
+}
 
 export {
     inicioUsuarios,
@@ -221,7 +455,17 @@ export {
     formularioRegistroPacientes, 
     registrar,
     formularioRegistroCitas,
-    registrarCita  
+    registrarCita,
+    //crud citas en el panel de usuario
+    listarCitas,
+    editarCitas,
+    guardarCambiosCitas,
+    eliminarCitas,
+    //crud pacientes
+    listarPacientes,
+    editarPacientes,
+    guardarCambiosPacientes,
+    eliminarPacientes,
 }
 
 

@@ -16,7 +16,7 @@ const Cita = db.define('citas', {
             allowNull: false
         },
         fecha_nacimiento: {
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
         },
         edad: {
@@ -40,7 +40,7 @@ const Cita = db.define('citas', {
             allowNull: false
         },
         fecha_cita:{
-            type: DataTypes.DATE,
+            type: DataTypes.STRING,
             allowNull: false
         },
         hora_cita:{

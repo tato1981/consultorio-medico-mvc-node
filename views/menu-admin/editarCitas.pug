@@ -1,7 +1,7 @@
-extends ../layout/index-menu-usuarios
+extends ../layout/index-menu-admin
 
 block contenido 
-   div.py-3
+   div.py-1
      h2.text-center.text-2xl.font-extrabold= pagina
 
      if errores 
@@ -12,8 +12,8 @@ block contenido
                
     
    div.mt-5.mx-auto.max-w-screen-lg
-      .bg-white.opacity-90.py-4.px-4.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")
-         form.space-y-4(class="grid grid-cols-2 gap-3" method="POST" action="/menu-usuarios/registroCitas" noValidate)
+      .bg-white.opacity-90.py-8.px-4.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")
+         form.space-y-4(class="grid grid-cols-2 gap-3" method="POST"  noValidate)
             input(type="hidden" name="_csrf" value= csrfToken)
 
             div

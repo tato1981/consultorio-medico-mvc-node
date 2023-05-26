@@ -1,0 +1,43 @@
+extends ../layout/index-menu-admin
+
+block contenido 
+
+
+    div(class="flex flex-grow px-3 pt-0")
+     section(class=" flex-1 w-10  text-center font-bold")
+        h2(class="text-center font-bold text-2xl mt-10 ")= pagina
+
+          //- pre= JSON.stringify(usuarios, undefined, 2)
+
+        
+        if admins.length
+          div.mt-5.mx-auto.max-w-screen-lg.pt-5(class="")
+           .bg-white.opacity-90.py-8.px-5.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")               
+            table(class=" p-2 border-separate border-spacing-2 border border-slate-500 ")                    
+                thead
+                    tr 
+                        th(class="bg-slate-200  border border-slate-100 px-12 py-2") NOMBRE
+                        th(class="bg-slate-200  border border-slate-100 px-12 py-2") APELLIDOS
+                        th(class="bg-slate-200  border border-slate-100 px-12 py-2") DOCUMENTO
+                        th(class="bg-slate-200  border border-slate-100 px-12 py-2") EMAIL
+                        th(class="bg-slate-200  border border-slate-100 px-12 py-2") ACCIONES
+                        
+                        
+                tbody            
+                each admin in admins 
+                    tr 
+                        td(class="border border-slate-200 px4 py-2")= admin.nombre
+                        td(class="border border-slate-200  px4 py-2")= admin.apellidos
+                        td(class="border border-slate-200 px4 py-2")= admin.documento
+                        td(class="border border-slate-200 px4 py-2")= admin.email                                            
+                        td(class="text-center flex flex-grow mx-5")
+                        
+                            a( href=`/menu-admin/editarAdmins/${admin.id}`  class=" border border-slate-200 px4 py-2 text-white  font-bold bg-blue-600 hover:bg-blue-900 rounded-lg" ) Editar 
+                                                                
+                            form(method="POST" action=`/menu-admin/listado-eliminar-admins/${admin.id}` class="")
+                                input(type="hidden" name="_csrf" value= csrfToken)
+                                input(type="submit" class=' border border-slate-200 px4 py-2 text-white  font-bold bg-red-600 hover:bg-red-900 rounded-lg' value="Eliminar") 
+        
+        else 
+         p(class="text-center font-bold") No Hay Administradores Registrados
+                                
