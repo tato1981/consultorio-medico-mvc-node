@@ -40,7 +40,7 @@ block contenido
                         
                             a( href=`/menu-usuarios/editarPacientes/${paciente.id}`  class=" border border-slate-200 px4 py-2 text-white  font-bold bg-blue-600 hover:bg-blue-900 rounded-lg" ) Editar 
                                                                 
-                            form(method="POST" action=`/menu-usuarios/listado-eliminar-paciente/${paciente.id}`)
+                            form(method="POST" action=`/menu-usuarios/listado-eliminar-pacientes/${paciente.id}`)
                                 input(type="hidden" name="_csrf" value= csrfToken)
                                 input(type="submit" class=' border border-slate-200 px4 py-2 text-white  font-bold bg-red-600 hover:bg-red-900 rounded-lg' value="Eliminar" )
         else 

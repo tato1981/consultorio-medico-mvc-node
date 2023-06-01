@@ -1,0 +1,65 @@
+extends ../layout/index-menu-medicos
+
+block contenido 
+  div.py-4         
+    h2.text-center.text-3xl.font-extrabold= pagina 
+
+    if errores
+      div(class="max-w-md mx-auto my-10")
+        each error in errores
+         p.bg-red-600.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold=error.msg 
+
+    div.mt-5.mx-auto.max-w-screen-lg
+      .bg-white.opacity-90.py-8.px-4.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")
+         form.space-y-4(class="grid grid-cols-2 gap-2 " method="POST" action="/menu-medicos/registroFormulaMedica")
+            input(type="hidden" name="_csrf" value= csrfToken) 
+
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="fecha_actual") Fecha de Actual
+                  input#fecha_actual.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Fecha actual" type="date" name="fecha_actual" value= formula_medica ? formula_medica.fecha_actual : '') 
+            
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="fecha_entrega") Fecha de Entrega
+                  input#fecha_entrega.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Fecha De Entrega" type="date" name="fecha_entrega" value= formula_medica ? formula_medica.fecha_entrega : '') 
+
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="nombres_paciente") Nombres del Paciente
+                  input#nombres_paciente.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Nombres del Paciente" type="text" name="nombres_paciente" value= formula_medica ? formula_medica.nombres_paciente : '' )       
+                        
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="documento") Documento
+                  input#documento.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Documento" type="number" name="documento" value= formula_medica ? formula_medica.documento : '' )                  
+            
+                    
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="email") Email
+                  input#email.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="email" type="email" name="email" value= formula_medica ? formula_medica.email : '' )
+
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="telefono") Teléfono
+                  input#telefono.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" telefono" type="number" name="telefono" value= formula_medica ? formula_medica.telefono : '')        
+               
+                  
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="Servicio_medico") Servicio Medico
+                  input#servicio_medico.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Servicio Medico" type="text" name="servicio_medico" value= formula_medica ? formula_medica.servicio_medico : '' )
+
+            
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="descripcion_medicamentos") Descripción Medicamentos
+                  textarea#descripcion_medicamentos.w-full.px-3.py-3.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Descripcion de Medicamentos" type="text" name="descripcion_medicamentos" value= formula_medica ? formula_medica.descripcion_medicamentos : '' )
+
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="nombres_especialista") Nombres completos del Especialista
+                  input#nombres_especialista.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Nombres del Especialista" type="text" name="nombres_especialista" value= formula_medica ? formula_medica.nombres_especialista : '' ) 
+
+           
+                        
+            div
+                  label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="registro_medico") Registro Medico
+                  input#registro_medico.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Registro Medico" type="number" name="registro_medico" value= historiaClinica ? historiaClinica.registro_medico : '')
+
+
+
+            input(class="w-full bg-red-50 hover:bg-cyan-400 rounded-lg border-solid border-2 border-cyan-400 text-black font-bold py-3 cursor-pointer " type="submit" value="Registrar")
+

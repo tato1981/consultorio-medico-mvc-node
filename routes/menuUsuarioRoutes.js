@@ -1,7 +1,7 @@
 
 import express from 'express';
 import { body } from 'express-validator'
-import {inicioUsuarios, admin, formularioRegistroPacientes, registrar, formularioRegistroCitas, registrarCita, listarCitas, eliminarCitas, editarCitas,guardarCambiosCitas, listarPacientes,eliminarPacientes,editarPacientes, guardarCambiosPacientes, inicioPagos, pagoEfectivo, pagoTarjeta, transferencia} from '../controllers/menu-usuario-controller.js'
+import {inicioUsuarios, admin, formularioRegistroPacientes, registrar, formularioRegistroCitas, registrarCita, listarCitas, eliminarCitas, editarCitas,guardarCambiosCitas, listarPacientes,eliminarPacientes,editarPacientes, guardarCambiosPacientes, inicioPagos, pagoEfectivo, pagoTarjeta} from '../controllers/menu-usuario-controller.js'
 import protegerRuta from '../middelware/protegerRuta.js';
 
 
@@ -9,25 +9,25 @@ const router = express.Router();
 
 //rautes menu usuarios
 
-router.get('/menu-usuarios', protegerRuta, admin)
+router.get('/menu-usuarios', admin)
 
 router.get('/menu-usuarios/inicio-usuarios', inicioUsuarios)
 
-router.get('/menu-usuarios/registroPacientes', protegerRuta, formularioRegistroPacientes );
-router.post('/menu-usuarios/registroPacientes',protegerRuta, registrar );
+router.get('/menu-usuarios/registroPacientes', formularioRegistroPacientes );
+router.post('/menu-usuarios/registroPacientes', registrar );
 //router.post('/registro-usuario',registrar );
 
 //registro de citas
-router.get('/menu-usuarios/registroCitas',protegerRuta, formularioRegistroCitas)
-router.post('/menu-usuarios/registroCitas',protegerRuta, registrarCita)
+router.get('/menu-usuarios/registroCitas', formularioRegistroCitas)
+router.post('/menu-usuarios/registroCitas', registrarCita)
 
 
 //routes crud citas
-router.get('/menu-usuarios/listado-citas',protegerRuta, listarCitas)
+router.get('/menu-usuarios/listado-citas', listarCitas)
 //eliminar citas
 router.post('/menu-usuarios/listado-eliminar-citas/:id', eliminarCitas),
 //editar citas
-router.get('/menu-usuarios/editarCitas/:id',protegerRuta, editarCitas),
+router.get('/menu-usuarios/editarCitas/:id', editarCitas),
 router.post('/menu-usuarios/editarCitas/:id',
 
 body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
@@ -44,12 +44,12 @@ guardarCambiosCitas,
 ),
 
 //routes crud pacientes panel usuarios
-router.get('/menu-usuarios/listado-pacientes',protegerRuta, listarPacientes),
+router.get('/menu-usuarios/listado-pacientes', listarPacientes),
 //eliminar pacientes
 router.post('/menu-usuarios/listado-eliminar-pacientes/:id', eliminarPacientes),
 //editar pacientes
-router.get('/menu-usuarios/editarPacientes/:id',protegerRuta, editarPacientes),
-router.post('/menu-usuarios/editarPacientes/:id',protegerRuta,
+router.get('/menu-usuarios/editarPacientes/:id', editarPacientes),
+router.post('/menu-usuarios/editarPacientes/:id',
 
 body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
 body('apellidos').notEmpty().withMessage('El apellido es obligatorio'),
@@ -66,8 +66,8 @@ guardarCambiosPacientes,
 
 router.get('/menu-usuarios/inicio-pagos', inicioPagos),
 router.get('/menu-usuarios/pago-efectivo', pagoEfectivo),
-router.get('/menu-usuarios/pago-tarjeta', pagoTarjeta),
-router.get('/menu-usuarios/transferencia', transferencia)
+router.get('/menu-usuarios/pago-tarjeta', pagoTarjeta)
+
 
 
 export default router

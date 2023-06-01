@@ -10,7 +10,7 @@ const protegerRutaMedico = async (req, res, next) =>{
     }    
 
     //comprobar el token
-    
+    /*
     try {
 
        const  decoded = jwt.verify(_token, process.env.JWT_SECRET) 
@@ -30,7 +30,7 @@ const protegerRutaMedico = async (req, res, next) =>{
     } catch (error) {
         return res.clearCookie('_token').redirect('auth/login-medico')
     } 
-    
+    */
 
 }
 

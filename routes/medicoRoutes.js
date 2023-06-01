@@ -8,8 +8,8 @@ const router = express.Router();
 router.get('/login-medico', formularioLoginMedico);
 router.post('/login-medico', autenticarLoginMedico);
 
-router.get('/registro-medico',protegerRutaMedico, formularioRegistroMedico );
-router.post('/registro-medico',protegerRutaMedico, registrarMedico );
+router.get('/registro-medico', formularioRegistroMedico );
+router.post('/registro-medico', registrarMedico );
 
 router.get('/confirmar-cuenta-medico/:token', confirmar);
 

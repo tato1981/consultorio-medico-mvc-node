@@ -7,7 +7,7 @@ import Usuario from '../models/Usuario.js'
 
 const inicioUsuarios =  (req,res) => {
     res.render('menu-usuarios/inicio-usuarios', {
-        pagina: 'Inicio Usuarios',
+        pagina: 'Inicio Usuarios ',
         barra: 'true',       
         
     })
@@ -312,6 +312,7 @@ const eliminarCitas = async (req, res) => {
     }
 
         // Eliminar la propiedad
+    //alert('Desea eliminar este registro de Cita')
     await citas.destroy()
     res.redirect('/menu-usuarios/listado-citas')
 
@@ -466,14 +467,7 @@ const pagoTarjeta = (req,res) =>{
         })
 }
 
-const transferencia = (req,res) =>{
 
-    res.render('menu-usuarios/transferencia', {
-        pagina: 'Transferencia Bancaria',
-        barra: 'true',       
-            
-        })
-    }
 
         
 
@@ -500,7 +494,7 @@ export {
     inicioPagos,
     pagoEfectivo,
     pagoTarjeta,
-    transferencia,
+    
 }
 
 

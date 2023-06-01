@@ -29,7 +29,7 @@ try {
     db.sync() //sync se encarga de crear la tabla
     console.log('Conexión Correcta a la base de datos')
 } catch (error) {
-    console.log(error)
+    console.log(error).redirect('/menu-admin/404')
 }
 
 

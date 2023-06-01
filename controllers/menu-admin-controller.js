@@ -1,4 +1,5 @@
 import { check, validationResult } from 'express-validator'
+import swal from 'sweetalert2'
 import Usuario from '../models/Usuario.js'
 import Medico from '../models/Medico.js'
 import Paciente from '../models/Paciente.js'
@@ -117,21 +118,26 @@ const guardarCambios = async (req,res) =>{
 
 //eliminar usuarios
 const eliminarUsuarios = async (req, res) => {
-    const {id} = req.params
-
+   
+    const {id} = req.params   
     const usuarios = await Usuario.findByPk(id)
 
     if(!usuarios) {
         return res.redirect('/menu-admin/listado-usuarios')
     }
 
-        // Eliminar la propiedad
+        // Eliminar la propiedad 
+    
     await usuarios.destroy()
     res.redirect('/menu-admin/listado-usuarios')
+     
 
 }
 
 
+
+
+////////////////////////////////////////////////////////////////////////////
 //crud medicos
 
 //listar medicos
@@ -139,7 +145,7 @@ const listarMedicos = async (req,res) =>{
 
     const medicos = await Medico.findAll({ })
 
-      res.render('menu-admin/listado-medicos', {
+        res.render('menu-admin/listado-medicos', {
         pagina: 'Medicos Registrados',
         csrfToken: req.csrfToken(),      
         barra: 'true',
@@ -260,7 +266,7 @@ const listarPacientes = async (req,res) =>{
     const pacientes = await Paciente.findAll({ })
 
       res.render('menu-admin/listado-pacientes', {
-        pagina: 'Medicos Registrados',
+        pagina: 'Pacientes Registrados',
         csrfToken: req.csrfToken(),      
         barra: 'true',
         pacientes,
@@ -407,7 +413,7 @@ const  editarAdmins = async (req, res) =>{
     ])
 
     res.render('menu-admin/editarAdmins', {
-        pagina: `Editar admis: ${admin.nombre}`,
+        pagina: `Editar admins: ${admin.nombre}`,
         csrfToken: req.csrfToken(),
         barra: true,
         admins,
@@ -608,6 +614,7 @@ const eliminarCitas = async (req, res) => {
 
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -640,6 +647,9 @@ export {
     editarCitas,
     guardarCambiosCitas,
     eliminarCitas,
+
+    
+    
 
 
 }

@@ -12,6 +12,12 @@ const formularioLoginAdmin = (req,res)=> {
     })
 }
 
+const cerrarSesion = (req, res) =>{
+    return res.clearCookie('_token').status(200).redirect('/auth/login-admin')
+
+    
+}
+
 
 //autenticación de login 
 const autenticarLoginAdmin = async (req, res) =>{
@@ -35,7 +41,7 @@ const autenticarLoginAdmin = async (req, res) =>{
 
     const {email, password} = req.body
 
-    //comprobar si el medico existe
+    //comprobar si el admin existe
     const admin = await Admin.findOne({where: {email}})
     if(!admin){
         //errores del formulario login
@@ -90,7 +96,7 @@ const formularioRegistroAdmin = (req, res) => {
 }
 
 
-//registrar medico
+//registrar admins
 const registrarAdmin = async(req, res) => {
     //validaciones
     await check('nombre').notEmpty().withMessage('El nombre es obligatorio').run(req)
@@ -326,6 +332,7 @@ const nuevoPasswordAdmin = async(req, res) =>{
 export {
     formularioLoginAdmin,
     autenticarLoginAdmin,
+    cerrarSesion,
     formularioRegistroAdmin,
     registrarAdmin,
     confirmarAdmin,

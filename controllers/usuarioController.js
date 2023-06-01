@@ -1,4 +1,3 @@
-
 import { check, validationResult } from 'express-validator'
 import bcrypt from 'bcrypt'
 import Usuario from "../models/Usuario.js"
@@ -11,9 +10,13 @@ import {emailRegistro, olvidePasswordUsuario} from '../helpers/emails.js'
 //controlador del aplicativo
 const formularioLoginUsuario = (req,res)=> {
     res.render('auth/login-usuario', {
-        pagina: 'Iniciar Sesión Usuarios',
+        pagina: 'Inicio Sesión Usuarios',
         csrfToken: req.csrfToken(),
     })
+}
+
+const cerrarSesion = (req, res) =>{
+    return res.clearCookie('_token').status(200).redirect('/auth/login-admin')
 }
 
 const autenticarLoginUsuario = async (req, res) =>{
@@ -27,7 +30,7 @@ const autenticarLoginUsuario = async (req, res) =>{
     if(!resultado.isEmpty()){
     //errores del formulario
         return res.render('auth/login-usuario', {
-            pagina: 'Iniciar Sesión',
+            pagina: 'Inicio Sesión Usuarios',
             csrfToken: req.csrfToken(),
             errores: resultado.array(),
                         
@@ -41,7 +44,7 @@ const autenticarLoginUsuario = async (req, res) =>{
     if(!usuario){
         //errores del formulario login
         return res.render('auth/login-usuario', {
-            pagina: 'Iniciar Sesión',
+            pagina: 'Inicio Sesión Usuarios',
             csrfToken: req.csrfToken(),
             errores: [{msg: 'El Usuario No Existe'}],                        
         })
@@ -97,7 +100,7 @@ const registrar = async(req, res) => {
     await check('apellidos').notEmpty().withMessage('El apellido es obligatorio').run(req)
     await check('documento').notEmpty().withMessage('El documento es obligatorio').run(req)
     await check('email').isEmail().withMessage('Eso no parece un email valido').run(req)
-    await check('telefono').notEmpty().withMessage('El teléfono es').run(req)       
+    await check('telefono').notEmpty().withMessage('El teléfono es obligatorio').run(req)       
     await check('password').isLength({min: 6}).withMessage('El password debe ser mayor a 6 caracteres').run(req)
     await check('repetir_password').equals(req.body.password).withMessage('Los password no son iguales').run(req)
     
@@ -330,6 +333,7 @@ const nuevoPasswordUsuario = async(req, res) =>{
 export {
     formularioLoginUsuario,
     autenticarLoginUsuario,
+    cerrarSesion,
     formularioRegistroUsuario,
     registrar,
     confirmar,

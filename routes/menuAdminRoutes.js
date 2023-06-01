@@ -3,19 +3,19 @@ import express from 'express';
 import { body } from 'express-validator'
 //los export nombrados se deben asignar objeto y termina con la extension del archivo
 import { admin, listarUsuarios, eliminarUsuarios, editarUsuarios, guardarCambios, listarMedicos, eliminarMedicos, editarMedicos, guardarCambiosMedico, listarPacientes, eliminarPacientes, editarPacientes, guardarCambiosPacientes, listarCitas, eliminarCitas,editarCitas, guardarCambiosCitas, listarAdmins, eliminarAdmins, editarAdmins,guardarCambiosAdmins} from '../controllers/menu-admin-controller.js'
-import protegerRutaAdmin from '../middelware/protegerRutaAdmin.js';
+import protegerRuta from '../middelware/protegerRutaAdmin.js';
 
 const router = express.Router();
 
 //rautes menu usuarios
-router.get('/menu-admin', protegerRutaAdmin,  admin)
+router.get('/menu-admin',  admin)
 
 //routes crud usuarios
-router.get('/menu-admin/listado-usuarios',protegerRutaAdmin,listarUsuarios),
-router.post('/menu-admin/listado-eliminar/:id',protegerRutaAdmin,eliminarUsuarios),
-router.get('/menu-admin/editarUsuarios/:id',protegerRutaAdmin,editarUsuarios),
+router.get('/menu-admin/listado-usuarios',listarUsuarios),
+router.post('/menu-admin/listado-eliminar/:id',eliminarUsuarios),
+router.get('/menu-admin/editarUsuarios/:id',editarUsuarios),
 
-router.post('/menu-admin/editarUsuarios/:id',protegerRutaAdmin,
+router.post('/menu-admin/editarUsuarios/:id',
 body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
 body('apellidos').notEmpty().withMessage('El apellido es obligatorio'),
 body('documento').notEmpty().withMessage('El documento es obligatorio'),
@@ -26,12 +26,12 @@ guardarCambios,
 )
 
 //routes crud medicos
-router.get('/menu-admin/listado-medicos',protegerRutaAdmin,listarMedicos),
+router.get('/menu-admin/listado-medicos',listarMedicos),
 //eliminar medicos
 router.post('/menu-admin/listado-eliminar-medico/:id', eliminarMedicos),
 //editar medicos
-router.get('/menu-admin/editarMedicos/:id',protegerRutaAdmin,editarMedicos),
-router.post('/menu-admin/editarMedicos/:id',protegerRutaAdmin,
+router.get('/menu-admin/editarMedicos/:id',editarMedicos),
+router.post('/menu-admin/editarMedicos/:id',
 body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
 body('apellidos').notEmpty().withMessage('El apellido es obligatorio'),
 body('documento').notEmpty().withMessage('El documento es obligatorio'),
@@ -44,12 +44,12 @@ guardarCambiosMedico,
 ),
 
 //routes crud pacientes
-router.get('/menu-admin/listado-pacientes',protegerRutaAdmin,listarPacientes),
+router.get('/menu-admin/listado-pacientes',listarPacientes),
 //eliminar pacientes
 router.post('/menu-admin/listado-eliminar-pacientes/:id', eliminarPacientes),
 //editar pacientes
-router.get('/menu-admin/editarPacientes/:id',protegerRutaAdmin,editarPacientes),
-router.post('/menu-admin/editarPacientes/:id',protegerRutaAdmin,
+router.get('/menu-admin/editarPacientes/:id',editarPacientes),
+router.post('/menu-admin/editarPacientes/:id',
 body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
 body('apellidos').notEmpty().withMessage('El apellido es obligatorio'),
 body('documento').notEmpty().withMessage('El documento es obligatorio'),
@@ -64,12 +64,12 @@ guardarCambiosPacientes,
 ),
 
 //routes crud citas
-router.get('/menu-admin/listado-citas',protegerRutaAdmin,listarCitas)
+router.get('/menu-admin/listado-citas',listarCitas)
 //eliminar citas
 router.post('/menu-admin/listado-eliminar-citas/:id', eliminarCitas),
 //editar citas
-router.get('/menu-admin/editarCitas/:id',protegerRutaAdmin,editarCitas),
-router.post('/menu-admin/editarCitas/:id',protegerRutaAdmin,
+router.get('/menu-admin/editarCitas/:id',editarCitas),
+router.post('/menu-admin/editarCitas/:id',
 body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
 body('apellidos').notEmpty().withMessage('El apellido es obligatorio'),
 body('documento').notEmpty().withMessage('El documento es obligatorio'),
@@ -84,12 +84,12 @@ guardarCambiosCitas,
 ),
 
 //routes crud admins
-router.get('/menu-admin/listado-admins',protegerRutaAdmin,listarAdmins)
+router.get('/menu-admin/listado-admins',listarAdmins)
 //eliminar citas
 router.post('/menu-admin/listado-eliminar-admins/:id', eliminarAdmins),
 //editar citas
-router.get('/menu-admin/editarAdmins/:id',protegerRutaAdmin,editarAdmins),
-router.post('/menu-admin/editarAdmins/:id',protegerRutaAdmin,
+router.get('/menu-admin/editarAdmins/:id',editarAdmins),
+router.post('/menu-admin/editarAdmins/:id',
 body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
 body('apellidos').notEmpty().withMessage('El apellido es obligatorio'),
 body('documento').notEmpty().withMessage('El documento es obligatorio'),
@@ -98,6 +98,8 @@ body('email').isEmail().withMessage('Eso no parece un email valido'),
 guardarCambiosAdmins,
 
 )
+
+
 
 
 
