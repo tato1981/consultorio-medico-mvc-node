@@ -23,6 +23,7 @@ app.use(cookieParser())
 //habilitar el CSRF
 app.use(csrf({cookie: true}))
 
+
 //conexion a la base de datos
 try {
     await db.authenticate();
@@ -43,12 +44,14 @@ app.use(express.static('public'))
 
 
 //Routes
+
 app.use('/auth', usuarioRoutes)
 app.use('/auth', medicoRoutes)
 app.use('/auth', adminRoutes)
 app.use('/', menuUsuarioRouter)
 app.use('/', menuMedicoRouter)
 app.use('/', menuAdminRouter)
+
 
 
 
