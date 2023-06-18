@@ -10,12 +10,12 @@ router.post('/login-admin', autenticarLoginAdmin);
 //cerrar sesion
 router.post('/cerrar-sesion', cerrarSesion)
 
-router.get('/registro-admin', protegerRutaAdmin,formularioRegistroAdmin );
-router.post('/registro-admin',protegerRutaAdmin, registrarAdmin );
+router.get('/registro-admin', protegerRutaAdmin, formularioRegistroAdmin );
+router.post('/registro-admin', registrarAdmin );
 
 router.get('/confirmar-cuenta-admin/:token', confirmarAdmin);
 
-router.get('/olvide-password-admin',protegerRutaAdmin,  formularioOlvidePasswordAdmin );
+router.get('/olvide-password-admin',  formularioOlvidePasswordAdmin );
 router.post('/olvide-password-admin', resetPasswordAdmin );
 
 router.get('/olvide-password-admin/:token', comprobarTokenAdmin);

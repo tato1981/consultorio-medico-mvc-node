@@ -16,7 +16,7 @@ router.post('/cerrar-sesion', cerrarSesion)
 
 
 //registro usuarios
-router.get('/registro-usuario', formularioRegistroUsuario );
+router.get('/registro-usuario', protegerRuta,  formularioRegistroUsuario );
 router.post('/registro-usuario', registrar );
 
 //confirmar token

@@ -11,7 +11,7 @@ router.post('/login-medico', autenticarLoginMedico);
 //cerrar sesion
 router.post('/cerrar-sesion', cerrarSesion)
 
-router.get('/registro-medico', formularioRegistroMedico );
+router.get('/registro-medico', protegerRutaMedico, formularioRegistroMedico );
 router.post('/registro-medico', registrarMedico );
 
 
