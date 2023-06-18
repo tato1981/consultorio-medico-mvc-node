@@ -4,8 +4,7 @@
   "description": "Proyecto consultorio medico",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "dev": "node index.js",
+  "scripts": {   
     "start": "node index.js",
     "server": "nodemon index.js",
     "css": "postcss public/css/tailwind.css -o public/css/app.css --watch",
