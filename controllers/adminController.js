@@ -12,9 +12,9 @@ const formularioLoginAdmin = (req,res)=> {
     })
 }
 
+//cerrar sesion admin
 const cerrarSesion = (req, res) =>{
-    return res.clearCookie('_token').status(200).redirect('/auth/login-admin')
-
+    return res.clearCookie('_token').status(200).redirect('/menu-usuarios/inicio-usuarios')
     
 }
 
@@ -152,7 +152,7 @@ const registrarAdmin = async(req, res) => {
     } 
     
     
-    //almacenar un usuario
+    //almacenar un admin
     const admin = await Admin.create({
         nombre,
         apellidos,
@@ -248,10 +248,10 @@ const resetPasswordAdmin = async (req,res) =>{
 
     //enviar un email
     olvidePasswordAdmin({
-        nombre: req.body.nombre,
-        apellidos: req.body.apellidos,
-        documento: req.body.documento,
-        email: req.body.email,        
+        nombre: admin.nombre,
+        apellidos: admin.apellidos,
+        documento: admin.documento,
+        email: admin.email,        
         token:  admin.token
     })
 

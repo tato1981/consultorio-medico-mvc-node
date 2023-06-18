@@ -13,6 +13,10 @@ const formularioLoginMedico = (req,res)=> {
     })
 }
 
+const cerrarSesion = (req, res) =>{
+    return res.clearCookie('_token').status(200).redirect('/auth/menu-usuarios/inicio-usuarios')
+  }
+
 //autenticacion login medicos
 
 const autenticarLoginMedico = async (req, res) =>{
@@ -249,13 +253,13 @@ const resetPasswordMedico = async (req,res) =>{
 
     //enviar un email
     olvidePasswordMedico({
-        nombre: req.body.nombre,
-        apellidos: req.body.apellidos,
-        documento: req.body.documento,
-        email: req.body.email,
-        especialidad: req.body.especialidad,
-        telefono: req.body.telefono,
-        token:  medico.token
+        nombre:   medico.nombre,
+        apellidos: medico.apellidos,
+        documento: medico.documento,
+        email: medico.email,
+        especialidad: medico.especialidad,
+        telefono: medico.telefono,
+        token: medico.token
     })
 
     //rendirizar un mensaje
@@ -327,6 +331,7 @@ const nuevoPasswordMedico = async(req, res) =>{
 
 export  {
         formularioLoginMedico,
+        cerrarSesion,
         autenticarLoginMedico,
         formularioRegistroMedico,
         registrarMedico,

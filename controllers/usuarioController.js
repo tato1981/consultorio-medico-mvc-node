@@ -1,7 +1,7 @@
 import { check, validationResult } from 'express-validator'
 import bcrypt from 'bcrypt'
 import Usuario from "../models/Usuario.js"
-import {generarJWT, generarId } from '../helpers/tokens.js'
+import {generarJWTUsuario, generarIdUsuario } from '../helpers/tokens.js'
 import {emailRegistro, olvidePasswordUsuario} from '../helpers/emails.js'
 
 
@@ -16,8 +16,11 @@ const formularioLoginUsuario = (req,res)=> {
 }
 
 const cerrarSesion = (req, res) =>{
-    return res.clearCookie('_token').status(200).redirect('/auth/login-admin')
+    return res.clearCookie('_token').status(200).redirect('/menu-usuarios/inicio-usuarios')
+    
 }
+    
+
 
 const autenticarLoginUsuario = async (req, res) =>{
     //validacion formulario login
@@ -70,7 +73,7 @@ const autenticarLoginUsuario = async (req, res) =>{
     }
 
     //autenticar al usuario
-    const token = generarJWT({id: usuario.id, nombre: usuario.nombre})
+    const token = generarJWTUsuario({id: usuario.id, nombre: usuario.nombre})
 
     console.log(token)
 
@@ -162,7 +165,7 @@ const registrar = async(req, res) => {
         email,
         telefono,
         password,        
-        token: generarId()
+        token: generarIdUsuario()
     })
 
     //envia email de confirmacion
@@ -248,16 +251,16 @@ const resetPassword = async (req,res) =>{
     }
 
     //generar token y enviar el email.
-    usuario.token = generarId();
+    usuario.token = generarIdUsuario();
     await usuario.save();
 
     //enviar un email
     olvidePasswordUsuario({
-        nombre: req.body.nombre,
-        apellidos: req.body.apellidos,
-        documento: req.body.documento,
-        email: req.body.email,
-        telefono: req.body.telefono,
+        nombre: usuario.nombre,
+        apellidos: usuario.apellidos,
+        documento: usuario.documento,
+        email: usuario.email,
+        telefono: usuario.telefono,
         token:  usuario.token
     })
 

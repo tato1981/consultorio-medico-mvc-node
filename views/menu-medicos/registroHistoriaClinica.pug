@@ -16,53 +16,53 @@ block contenido
 
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="fecha_actual") Fecha de Actual
-                  input#fecha_actual.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Fecha actual" type="date" name="fecha_actual" value= historia_clinica ? historia_clinica.fecha_actual : '') 
+                  input#fecha_actual.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Fecha actual" type="date" name="fecha_actual" value= datos ? historia_clinica.fecha_actual : '') 
 
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="nombres_paciente") Nombres del Paciente
-                  input#nombres_paciente.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Nombres del Paciente" type="text" name="nombres_paciente" value= historia_clinica ? historia_clinica.nombres_paciente : '' )        
+                  input#nombres_paciente.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Nombres del Paciente" type="text" name="nombres_paciente" value= datos ? historia_clinica.nombres_paciente : '' )        
             
             
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="documento") Documento
-                  input#documento.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Documento" type="number" name="documento" value= historia_clinica ? historia_clinica.documento : '' )                  
+                  input#documento.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Documento" type="number" name="documento" value= datos ? historia_clinica.documento : '' )                  
                   
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="fecha_nacimiento") Fecha de Nacimiento
-                  input#fecha_nacimiento.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Fecha de Nacimiento" type="date" name="fecha_nacimiento" value= historia_clinica ? historia_clinica.fecha_nacimiento : '') 
+                  input#fecha_nacimiento.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Fecha de Nacimiento" type="date" name="fecha_nacimiento" value= datos ? historia_clinica.fecha_nacimiento : '') 
 
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="edad") Edad
-                  input#edad.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Edad" type="text" name="edad" value= historia_clinica ? historia_clinica.edad : '')         
+                  input#edad.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Edad" type="text" name="edad" value= datos ? historia_clinica.edad : '')         
                
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="email") Email
-                  input#email.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="email" type="email" name="email" value= historia_clinica ? historia_clinica.email : '' )
+                  input#email.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="email" type="email" name="email" value= datos ? historia_clinica.email : '' )
 
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="telefono") Teléfono
-                  input#telefono.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" telefono" type="number" name="telefono" value= historia_clinica ? historia_clinica.telefono : '')        
+                  input#telefono.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" telefono" type="number" name="telefono" value= datos ? historia_clinica.telefono : '')        
                
                   
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="Servicio_medico") Servicio Medico
-                  input#servicio_medico.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Servicio Medico" type="text" name="servicio_medico" value= historia_clinica ? historia_clinica.servicio_medico : '' )
+                  input#servicio_medico.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Servicio Medico" type="text" name="servicio_medico" value= datos ? historia_clinica.servicio_medico : '' )
 
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="motivo_consulta") Motivo de la Consulta
-                  textarea#motivo_consulta.w-full.px-3.py-5.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Motivo de la Consulta" type="text" name="motivo_consulta" value= historia_clinica ? historia_clinica.motivo_consulta : '' )
+                  textarea#motivo_consulta.w-full.px-3.py-5.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Motivo de la Consulta" type="text" name="motivo_consulta" value= datos ? historia_clinica.motivo_consulta : '' )
 
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="observeciones_especialista") Observaciones del Especialista
-                  textarea#observaciones_especialista.w-full.px-3.py-5.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Observaciones del Especialista" type="text" name="observaciones_especialista" value= historia_clinica ? historia_clinica.observaciones_especialista : '' )
+                  textarea#observaciones_especialista.w-full.px-3.py-5.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Observaciones del Especialista" type="text" name="observaciones_especialista" value= datos ? historia_clinica.observaciones_especialista : '' )
 
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="nombres_especialista") Nombres completos del Especialista
-                  input#nombres_especialista.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Nombres del Especialista" type="text" name="nombres_especialista" value= historiaClinica ? historiaClinica.nombres_especialista : '' ) 
+                  input#nombres_especialista.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder=" Nombres del Especialista" type="text" name="nombres_especialista" value= datos ? historiaClinica.nombres_especialista : '' ) 
 
             div
                   label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="registro_medico") Registro Medico
-                  input#registro_medico.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Registro Medico" type="number" name="registro_medico" value= historiaClinica ? historiaClinica.registro_medico : '')  
+                  input#registro_medico.w-full.px-3.py-1.border.border-gray-300.rounder-md.placeholder-gray-400(placeholder="Registro Medico" type="number" name="registro_medico" value= datos ? historiaClinica.registro_medico : '')  
 
 
 

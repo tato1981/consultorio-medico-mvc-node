@@ -6,7 +6,7 @@ import protegerRuta from '../middelware/protegerRutaMedico.js';
 const router = express.Router();
 
 //rautes menu usuarios
-router.get('/menu-medicos', admin)
+router.get('/menu-medicos', protegerRuta, admin)
 
 //routes crud citas
 router.get('/menu-medicos/listado-citas',listarCitas),

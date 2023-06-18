@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken'
 
 //jwt Usuarios
 
-const generarJWT = datos =>  jwt.sign({ id: datos.id, nombre: datos.nombre }, process.env.JWT_SECRET, { expiresIn: '1d'})
-const generarId = () =>   Math.random().toString(32).substring(2) + Date.now().toString(32)
+const generarJWTUsuario = datos =>  jwt.sign({ id: datos.id, nombre: datos.nombre }, process.env.JWT_SECRET, { expiresIn: '1d'})
+const generarIdUsuario = () =>   Math.random().toString(32).substring(2) + Date.now().toString(32)
 
 //jwt mwdicos
 
@@ -17,8 +17,8 @@ const generarJWTAdmin = datos =>  jwt.sign({ id: datos.id, nombre: datos.nombre 
 const generarIdAdmin = () =>   Math.random().toString(32).substring(2) + Date.now().toString(32)
 
 export{
-    generarJWT,
-    generarId,
+    generarJWTUsuario,
+    generarIdUsuario,
 
     generarJWTMedico,
     generarIdMedico,

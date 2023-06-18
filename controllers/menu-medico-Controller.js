@@ -5,6 +5,7 @@ import Cita from '../models/Cita.js'
 const admin = (req,res) => {
     res.render('menu-medicos/admin', {
         pagina: 'Menu Principal Medicos',
+        csrfToken: req.csrfToken(), 
         barra: 'true',
         
     })

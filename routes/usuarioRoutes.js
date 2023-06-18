@@ -1,7 +1,7 @@
 
 import express from 'express';
 //los export nombrados se deben asignar objeto y termina con la extension del archivo
-import {formularioLoginUsuario,autenticarLoginUsuario, cerrarSesion, formularioRegistroUsuario, registrar, confirmar, formularioOlvidePasswordUsuario, resetPassword, comprobarTokenUsuario,nuevoPasswordUsuario } from '../controllers/usuarioController.js'
+import {formularioLoginUsuario,autenticarLoginUsuario,cerrarSesion,   formularioRegistroUsuario, registrar, confirmar, formularioOlvidePasswordUsuario, resetPassword, comprobarTokenUsuario,nuevoPasswordUsuario } from '../controllers/usuarioController.js'
 import protegerRuta from '../middelware/protegerRuta.js';
 
 const router = express.Router();
@@ -12,7 +12,7 @@ router.get('/login-usuario', formularioLoginUsuario)
 router.post('/login-usuario', autenticarLoginUsuario);
 
 //cerrar sesion
-router.post('/auth/cerrar-sesion', cerrarSesion)
+router.post('/cerrar-sesion', cerrarSesion)
 
 
 //registro usuarios

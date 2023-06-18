@@ -3,15 +3,15 @@ import express from 'express';
 import { body } from 'express-validator'
 //los export nombrados se deben asignar objeto y termina con la extension del archivo
 import { admin, listarUsuarios, eliminarUsuarios, editarUsuarios, guardarCambios, listarMedicos, eliminarMedicos, editarMedicos, guardarCambiosMedico, listarPacientes, eliminarPacientes, editarPacientes, guardarCambiosPacientes, listarCitas, eliminarCitas,editarCitas, guardarCambiosCitas, listarAdmins, eliminarAdmins, editarAdmins,guardarCambiosAdmins} from '../controllers/menu-admin-controller.js'
-import protegerRuta from '../middelware/protegerRutaAdmin.js';
+import protegerRutaAdmin from '../middelware/protegerRutaAdmin.js';
 
 const router = express.Router();
 
 //rautes menu usuarios
-router.get('/menu-admin',  admin)
+router.get('/menu-admin', protegerRutaAdmin, admin)
 
 //routes crud usuarios
-router.get('/menu-admin/listado-usuarios',listarUsuarios),
+router.get('/menu-admin/listado-usuarios', protegerRutaAdmin, listarUsuarios),
 router.post('/menu-admin/listado-eliminar/:id',eliminarUsuarios),
 router.get('/menu-admin/editarUsuarios/:id',editarUsuarios),
 
@@ -26,7 +26,7 @@ guardarCambios,
 )
 
 //routes crud medicos
-router.get('/menu-admin/listado-medicos',listarMedicos),
+router.get('/menu-admin/listado-medicos', protegerRutaAdmin, listarMedicos),
 //eliminar medicos
 router.post('/menu-admin/listado-eliminar-medico/:id', eliminarMedicos),
 //editar medicos
@@ -44,7 +44,7 @@ guardarCambiosMedico,
 ),
 
 //routes crud pacientes
-router.get('/menu-admin/listado-pacientes',listarPacientes),
+router.get('/menu-admin/listado-pacientes', protegerRutaAdmin, listarPacientes),
 //eliminar pacientes
 router.post('/menu-admin/listado-eliminar-pacientes/:id', eliminarPacientes),
 //editar pacientes
@@ -64,7 +64,7 @@ guardarCambiosPacientes,
 ),
 
 //routes crud citas
-router.get('/menu-admin/listado-citas',listarCitas)
+router.get('/menu-admin/listado-citas', protegerRutaAdmin, listarCitas)
 //eliminar citas
 router.post('/menu-admin/listado-eliminar-citas/:id', eliminarCitas),
 //editar citas
@@ -84,7 +84,7 @@ guardarCambiosCitas,
 ),
 
 //routes crud admins
-router.get('/menu-admin/listado-admins',listarAdmins)
+router.get('/menu-admin/listado-admins', protegerRutaAdmin ,listarAdmins)
 //eliminar citas
 router.post('/menu-admin/listado-eliminar-admins/:id', eliminarAdmins),
 //editar citas

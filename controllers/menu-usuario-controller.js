@@ -17,6 +17,7 @@ const admin = async (req,res) => {
 
         res.render('menu-usuarios/admin', {
         pagina: 'Menu Principal Usuarios',
+        csrfToken: req.csrfToken(),  
         barra: 'true', 
         
         
@@ -276,7 +277,7 @@ const guardarCambiosCitas = async (req,res) =>{
     //reescribir la cita y guardarla
 
     try {
-        const {nombre, apellidos, documento, fecha_nacimiento, edad, email, telefono, servicio_medico} = req.body;
+        const {nombre, apellidos, documento, fecha_nacimiento, edad, email, telefono, servicio_medico, especialidad, fecha_cita, hora_cita} = req.body;
 
         cita.set({
             nombre,
@@ -286,7 +287,10 @@ const guardarCambiosCitas = async (req,res) =>{
             edad,
             email,
             telefono,
-            servicio_medico
+            servicio_medico,
+            especialidad,
+            fecha_cita,
+            hora_cita,
         })
 
         await cita.save();
