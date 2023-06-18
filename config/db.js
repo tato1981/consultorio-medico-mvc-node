@@ -5,7 +5,7 @@ dotenv.config({path: '.env'})
 
 const db = new Sequelize(process.env.BD_DATABASE, process.env.BD_USER, process.env.BD_PASSWORD,{
      host: process.env.BD_HOST,
-     port: process.env.DB_PORT,
+     port: process.env.BD_PORT,
      dialect: 'mysql',
      define:{
         timestamps: true, //cuendo un usuario se registra agrega dos columnas por defecto 
