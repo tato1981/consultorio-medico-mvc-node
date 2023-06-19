@@ -1,5 +1,4 @@
 import { check, validationResult } from 'express-validator'
-import swal from 'sweetalert2'
 import Usuario from '../models/Usuario.js'
 import Medico from '../models/Medico.js'
 import Paciente from '../models/Paciente.js'
