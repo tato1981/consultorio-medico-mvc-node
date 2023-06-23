@@ -3,11 +3,11 @@
 import express from 'express'
 import csrf from 'csurf'
 import cookieParser from 'cookie-parser'
+import menuUsuarioRouter from './routes/menuUsuarioRoutes.js'
 import usuarioRoutes from './routes/usuarioRoutes.js'
 import medicoRoutes from './routes/medicoRoutes.js'
 import adminRoutes from './routes/adminRoutes.js'
 import menuMedicoRouter from './routes/menuMedicoRouter.js'
-import menuUsuarioRouter from './routes/menuUsuarioRoutes.js'
 import menuAdminRouter from './routes/menuAdminRoutes.js'
 import db from './config/db.js'
 
@@ -44,11 +44,10 @@ app.use(express.static('public'))
 
 
 //Routes
-
+app.use('/', menuUsuarioRouter)
 app.use('/auth', usuarioRoutes)
 app.use('/auth', medicoRoutes)
 app.use('/auth', adminRoutes)
-app.use('/', menuUsuarioRouter)
 app.use('/', menuMedicoRouter)
 app.use('/', menuAdminRouter)
 
