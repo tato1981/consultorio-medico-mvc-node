@@ -9,9 +9,9 @@ const router = express.Router();
 
 //rautes menu usuarios
 
-router.get('/menu-usuarios', protegerRuta, admin)
+router.get('/', inicioUsuarios) //pagina inicial
 
-router.get('/menu-usuarios/inicio-usuarios', inicioUsuarios)
+router.get('/menu-usuarios', protegerRuta, admin)
 
 router.get('/menu-usuarios/registroPacientes', protegerRuta, formularioRegistroPacientes );
 router.post('/menu-usuarios/registroPacientes', registrar );

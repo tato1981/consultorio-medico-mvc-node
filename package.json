@@ -4,7 +4,7 @@
 "main":"index.js",
 "type":"module",
 "scripts":{
-  "start --omit=dev":"node index.js",
+  "start ":"node index.js",
   "server":"nodemon index.js",
   "css":"postcss public/css/tailwind.css -o public/css/app.css --watch",
   "db:importar":"node ./seed/seeder.js -i",

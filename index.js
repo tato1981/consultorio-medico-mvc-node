@@ -56,7 +56,7 @@ app.use('/', menuAdminRouter)
 
 
 //definir puerto y arrancar el proyecto
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 1000;
 
 app.listen(port, ()=>{
     console.log(`El servidor esta funcionando en el puerto ${port}`)
