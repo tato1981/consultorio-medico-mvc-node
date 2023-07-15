@@ -4,8 +4,8 @@
 "main":"index.js",
 "type":"module",
 "scripts":{
-  "start ":"node index.js",
-  "server":"nodemon index.js",
+  "start ":"node app.js",
+  "server":"nodemon app.js",
   "css":"postcss public/css/tailwind.css -o public/css/app.css --watch",
   "db:importar":"node ./seed/seeder.js -i",
   "db:eliminar":"node ./seed/seeder.js -e"},
