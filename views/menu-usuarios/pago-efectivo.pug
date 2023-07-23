@@ -12,7 +12,7 @@ block contenido
 
     div.mt-5.mx-auto.max-w-screen-lg
       .bg-white.opacity-90.py-8.px-4.shadow.rounded-lg(class=" shadow-lg shadow-pink-400/50")
-         form.space-y-4(class="grid grid-cols-2 gap-2 " method="POST"  noValidate)
+         form.space-y-4(class="grid grid-cols-2 gap-2 " method="POST" action="templates/mensaje" noValidate)
             input(type="hidden" name="_csrf" value= csrfToken)
 
             div

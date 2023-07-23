@@ -455,20 +455,30 @@ const inicioPagos = (req,res) =>{
 
 const pagoEfectivo = (req,res) =>{
 
-        res.render('menu-usuarios/pago-efectivo', {
-            pagina: 'Pago en Efectivo',
-            barra: 'true',       
-                
+       // res.render('menu-usuarios/pago-efectivo', {
+        //    pagina: 'Pago en Efectivo',
+       //     barra: 'true',       
+        //    csrfToken: req.csrfToken(),   
+        //    })
+
+            res.render('templates/mensaje', {
+                pagina: 'Pagina en Construcción',
+                mensaje: 'Ofrecemos disculpas esta sesión aun se encuentra en desarrollo '
             })
         }
     
 const pagoTarjeta = (req,res) =>{
 
-        res.render('menu-usuarios/pago-tarjeta', {
-            pagina: 'Pago Tarjeta de Crédito',
-            barra: 'true',       
-                    
-        })
+     //   res.render('menu-usuarios/pago-tarjeta', {
+     //       pagina: 'Pago Tarjeta de Crédito',
+      //      barra: 'true',       
+      //      csrfToken: req.csrfToken(),        
+      //  })
+      
+      res.render('templates/mensaje', {
+        pagina: 'Pagina en Construcción',
+        mensaje: 'Ofrecemos disculpas esta sesión aun se encuentra en desarrollo '
+    })
 }
 
 

@@ -9,7 +9,7 @@ const router = express.Router();
 
 //rautes menu usuarios
 
-router.get('/', inicioUsuarios) //pagina inicial
+router.get('/menu-usuarios/inicio-usuarios', inicioUsuarios) //pagina inicial
 
 router.get('/menu-usuarios', protegerRuta, admin)
 
