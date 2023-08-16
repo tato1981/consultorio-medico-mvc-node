@@ -1,3 +1,5 @@
+//Proteccion rutas Admins
+
 import jwt from "jsonwebtoken"
 import {Admin} from "../models/index.js"
 

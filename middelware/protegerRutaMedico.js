@@ -1,3 +1,5 @@
+//Protección rutas medicos
+
 import jwt from "jsonwebtoken"
 import {Medico} from "../models/index.js"
 

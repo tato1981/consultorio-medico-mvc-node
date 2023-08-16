@@ -1,4 +1,4 @@
-
+//protección ruta usuario
 
 import jwt from "jsonwebtoken"
 import {Usuario} from "../models/index.js"
@@ -29,11 +29,8 @@ const protegerRuta = async (req, res, next) =>{
         
     } catch (error) {
         return res.clearCookie('_token').redirect('/auth/login-usuario')
-    }
+    }  
 
-   
-
-    
 
 }
 
